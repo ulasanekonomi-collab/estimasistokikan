@@ -7,20 +7,40 @@ st.set_page_config(page_title="Estimasi Stok Ikan via Satelit", layout="wide")
 st.title("🛰️ Uji Coba Estimasi Stok Ikan Berbasis Data Satelit")
 st.write("Simulasi integrasi data oseanografi (Suhu & Klorofil) untuk memprediksi fluktuasi biomassa.")
 
+# --- PETUNJUK MENGAMBIL DATA SATELIT (BARU) ---
+with st.expander("🌍 Panduan Mengambil Data Satelit Asli (Tugas Mandiri)"):
+    st.markdown("""
+    **Cara Mendapatkan Data Suhu Laut (SST) & Klorofil-a secara Gratis:**
+    
+    Untuk riset yang sesungguhnya, Anda tidak perlu membeli data. Gunakan portal *Open Access* dari lembaga antariksa dunia. Berikut langkah-langkahnya menggunakan **NASA Giovanni**:
+    
+    1. **Buka Portal:** Kunjungi situs [NASA Giovanni](https://giovanni.gsfc.nasa.gov/giovanni/). Anda perlu membuat akun gratis terlebih dahulu.
+    2. **Pilih Parameter:** 
+       * Ketik `SST` (Sea Surface Temperature) untuk mencari data suhu laut.
+       * Ketik `Chlorophyll` untuk mencari data klorofil-a.
+    3. **Tentukan Waktu:** Pilih rentang waktu analisis Anda (misalnya: *Januari 2025 - Desember 2025*).
+    4. **Tentukan Wilayah (Spatial):** Gunakan fitur *Bounding Box* di peta untuk menyeleksi wilayah perairan target (misal: Laut Jawa Timur atau perairan selatan Jawa).
+    5. **Visualisasi & Unduh:** Pilih format *Time Series* (Deret Waktu), lalu klik **Plot Data**. Setelah grafiknya muncul, klik tombol **Download** dan simpan dalam format **.CSV**.
+    
+    **Alternatif Sumber Lain:**
+    * **Copernicus Marine Service (Uni Eropa):** Sangat bagus untuk data resolusi tinggi.
+    * **NOAA CoastWatch:** Khusus untuk memantau perubahan lingkungan pesisir dan laut.
+    
+    *Tantangan: Unduh data .CSV dari portal tersebut, bersihkan datanya di Excel, lalu amati apakah trennya mirip dengan fluktuasi stok ikan di pelabuhan terdekat!*
+    """)
+
 # --- 1. GENERATOR DATA SATELIT (SIMULASI) ---
-# Kita buat data fluktuasi bulanan selama 1 tahun
 np.random.seed(42)
 bulan = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Ags', 'Sep', 'Okt', 'Nov', 'Des']
 x = np.arange(12)
 
-# Simulasi Suhu Permukaan Laut (SPL) - rata-rata 28-30 derajat Celcius (khas perairan tropis)
+# Simulasi Suhu Permukaan Laut (SPL)
 spl_data = 29 + np.sin(x/6 * np.pi) * 1.5 + np.random.normal(0, 0.3, 12)
 
-# Simulasi Klorofil-a (mg/m3) - Meningkat saat ada upwelling (misal di bulan Juli-Agustus)
+# Simulasi Klorofil-a (mg/m3)
 klorofil_data = 0.5 - np.cos(x/6 * np.pi) * 0.4 + np.random.normal(0, 0.1, 12)
-klorofil_data = np.clip(klorofil_data, 0.1, 2.0) # Pastikan tidak ada nilai negatif
+klorofil_data = np.clip(klorofil_data, 0.1, 2.0)
 
-# Gabungkan ke DataFrame
 df_satelit = pd.DataFrame({
     'Bulan': bulan,
     'Suhu_Laut_C': spl_data,
@@ -35,10 +55,9 @@ bobot_klorofil = st.sidebar.slider("Faktor Pengali Klorofil (α)", 1000, 5000, 3
 penalti_suhu = st.sidebar.slider("Faktor Penalti Suhu (β)", 100, 1000, 500, step=100)
 
 # --- 3. MODEL ESTIMASI STOK ---
-# Rumus: Stok Dasar + (Klorofil * Bobot) - (Selisih Suhu dari Optimal * Penalti)
 stok_dasar = 2000 
 df_satelit['Estimasi_Stok'] = stok_dasar + (df_satelit['Klorofil_a'] * bobot_klorofil) - (np.abs(df_satelit['Suhu_Laut_C'] - suhu_optimal) * penalti_suhu)
-df_satelit['Estimasi_Stok'] = np.clip(df_satelit['Estimasi_Stok'], 0, None) # Mencegah stok minus
+df_satelit['Estimasi_Stok'] = np.clip(df_satelit['Estimasi_Stok'], 0, None)
 
 # --- 4. VISUALISASI ---
 st.subheader("Data Satelit vs Estimasi Stok Ikan")
