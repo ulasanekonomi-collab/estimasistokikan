@@ -4,7 +4,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 st.set_page_config(page_title="Estimasi Stok Ikan via Satelit", layout="wide")
-st.title("🛰️ Uji Coba Estimasi Stok Ikan Berbasis Data Satelit")
+st.title("🛰️ Estimasi Stok Ikan Berbasis Data Satelit")
 st.write("Simulasi integrasi data oseanografi (Suhu & Klorofil) untuk memprediksi fluktuasi biomassa.")
 
 # --- PETUNJUK MENGAMBIL DATA SATELIT (DIPERBARUI) ---
