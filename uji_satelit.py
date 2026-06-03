@@ -7,26 +7,23 @@ st.set_page_config(page_title="Estimasi Stok Ikan via Satelit", layout="wide")
 st.title("🛰️ Uji Coba Estimasi Stok Ikan Berbasis Data Satelit")
 st.write("Simulasi integrasi data oseanografi (Suhu & Klorofil) untuk memprediksi fluktuasi biomassa.")
 
-# --- PETUNJUK MENGAMBIL DATA SATELIT (BARU) ---
+# --- PETUNJUK MENGAMBIL DATA SATELIT (DIPERBARUI) ---
 with st.expander("🌍 Panduan Mengambil Data Satelit Asli (Tugas Mandiri)"):
     st.markdown("""
     **Cara Mendapatkan Data Suhu Laut (SST) & Klorofil-a secara Gratis:**
     
-    Untuk riset yang sesungguhnya, Anda tidak perlu membeli data. Gunakan portal *Open Access* dari lembaga antariksa dunia. Berikut langkah-langkahnya menggunakan **NASA Giovanni**:
+    Untuk riset yang sesungguhnya, gunakan portal *Open Access* dari lembaga kelautan dan antariksa dunia. Berikut rekomendasi portal yang stabil dan mudah digunakan:
     
-    1. **Buka Portal:** Kunjungi situs [NASA Giovanni](https://giovanni.gsfc.nasa.gov/giovanni/). Anda perlu membuat akun gratis terlebih dahulu.
-    2. **Pilih Parameter:** 
-       * Ketik `SST` (Sea Surface Temperature) untuk mencari data suhu laut.
-       * Ketik `Chlorophyll` untuk mencari data klorofil-a.
-    3. **Tentukan Waktu:** Pilih rentang waktu analisis Anda (misalnya: *Januari 2025 - Desember 2025*).
-    4. **Tentukan Wilayah (Spatial):** Gunakan fitur *Bounding Box* di peta untuk menyeleksi wilayah perairan target (misal: Laut Jawa Timur atau perairan selatan Jawa).
-    5. **Visualisasi & Unduh:** Pilih format *Time Series* (Deret Waktu), lalu klik **Plot Data**. Setelah grafiknya muncul, klik tombol **Download** dan simpan dalam format **.CSV**.
+    1. **Copernicus Marine Data Store (Rekomendasi Utama)**
+       * **Buka Portal:** Kunjungi [https://data.marine.copernicus.eu/](https://data.marine.copernicus.eu/). Silakan buat akun secara gratis.
+       * **Cari Data:** Gunakan kolom pencarian dan ketik `SST` (Suhu Permukaan Laut) atau `Chlorophyll`.
+       * **Visualisasi & Unduh:** Pilih rentang waktu dan seleksi wilayah perairan target di peta, lalu unduh datanya dalam format **.CSV** untuk dianalisis lebih lanjut.
     
-    **Alternatif Sumber Lain:**
-    * **Copernicus Marine Service (Uni Eropa):** Sangat bagus untuk data resolusi tinggi.
-    * **NOAA CoastWatch:** Khusus untuk memantau perubahan lingkungan pesisir dan laut.
+    2. **NOAA CoastWatch**
+       * **Buka Portal:** Kunjungi [https://coastwatch.noaa.gov/](https://coastwatch.noaa.gov/)
+       * Gunakan portal ini sebagai alternatif jika Anda membutuhkan perbandingan data deret waktu kelautan yang komprehensif.
     
-    *Tantangan: Unduh data .CSV dari portal tersebut, bersihkan datanya di Excel, lalu amati apakah trennya mirip dengan fluktuasi stok ikan di pelabuhan terdekat!*
+    *Unduh data .CSV dari salah satu portal tersebut, bersihkan datanya, lalu amati apakah trennya sejalan dengan fluktuasi stok ikan di pelabuhan terdekat!*
     """)
 
 # --- 1. GENERATOR DATA SATELIT (SIMULASI) ---
