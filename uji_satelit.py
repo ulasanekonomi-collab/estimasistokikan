@@ -105,3 +105,41 @@ with st.expander("Lihat Detail Data Mentah"):
         'Klorofil_a': '{:.2f}',
         'Estimasi_Stok': '{:.0f}'
     }))
+
+// 1. Gambar area riset di peta menggunakan alat 'Draw Polygon'
+// 2. Ganti 'geometry' di bawah dengan poligon hasil gambar mahasiswa
+
+var table = geometry; 
+
+// Mengambil data MODIS untuk Klorofil-a dan SST
+var dataset = ee.ImageCollection("NASA/OCEANDATA/MODIS-Aqua/L3SMI")
+  .filterDate('2023-01-01', '2023-12-31');
+
+// Fungsi untuk menghitung rata-rata bulanan
+var months = ee.List.sequence(1, 12);
+var monthlyData = months.map(function(m) {
+  var filtered = dataset.filter(ee.Filter.calendarRange(m, m, 'month'))
+                        .mean()
+                        .clip(table);
+  
+  var stats = filtered.reduceRegion({
+    reducer: ee.Reducer.mean(),
+    geometry: table,
+    scale: 1000
+  });
+  
+  return ee.Feature(null, {
+    'Bulan': m,
+    'SST': stats.get('sst'),
+    'Klorofil': stats.get('chlor_a')
+  });
+});
+
+var featureCollection = ee.FeatureCollection(monthlyData);
+
+// Ekspor ke CSV
+Export.table.toDrive({
+  collection: featureCollection,
+  description: 'Data_Oseanografi_Riset',
+  fileFormat: 'CSV'
+});
