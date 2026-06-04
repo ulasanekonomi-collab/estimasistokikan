@@ -119,7 +119,7 @@ with st.sidebar:
     
     # 3. Menampilkan teks identitas
     st.markdown("""
-    <div style="text-align: center;">
+    <div style="text-align: left;">
         <p style="font-size: 12px; color: blue;">Yuhka Sundaya</p>
         <p style="font-size: 12px; color: gray;">Ekonomi Pembangunan | Unisba | 2026</p>
     </div>
