@@ -7,6 +7,15 @@ st.set_page_config(page_title="Estimasi Stok Ikan via Satelit", layout="wide")
 st.title("🛰️ Estimasi Stok Ikan Berbasis Data Satelit")
 st.write("Simulasi integrasi data oseanografi (Suhu & Klorofil) untuk memprediksi fluktuasi biomassa.")
 
+st.sidebar.markdown("### 📥 Import Data GEE (CSV)")
+uploaded_file = st.sidebar.file_uploader("Unggah data hasil GEE", type="csv")
+
+if uploaded_file is not None:
+    data_satelit = pd.read_csv(uploaded_file)
+    # Menghitung Carrying Capacity (K) berbasis rata-rata bulanan data GEE
+    k_rata_rata = ((data_satelit['Luas Habitat'].mean() * 1.5) + (data_satelit['Klorofil'].mean() * 500))
+    st.write(f"Estimasi K berdasarkan data satelit: {int(k_rata_rata)} Ton")
+    
 # --- PETUNJUK MENGAMBIL DATA SATELIT (DIPERBARUI) ---
 with st.expander("🌍 Panduan Mengambil Data Satelit Asli (Tugas Mandiri)"):
     st.markdown("""
