@@ -115,13 +115,13 @@ with st.sidebar:
     st.image("https://upload.wikimedia.org/wikipedia/commons/9/9e/Lambang-Universitas_Islam_Bandung.png", width=75)
     
     # 2. Menampilkan Foto Akang (Pastikan file 'foto_yuhka.jpg' ada di folder)
-    st.image("yuka.png", width=50) 
+    st.image("yuka.png", width=70) 
     
     # 3. Menampilkan teks identitas
     st.markdown("""
     <div style="text-align: left;">
-        <p style="font-size: 12px; color: blue; margin-bottom: 5px;">Yuhka Sundaya</p>
-        <p style="font-size: 12px; color: gray; margin-top: 0;">Ekonomi Pembangunan | Unisba | 2026</p>
+        <p style="font-size: 12px; color: blue; margin-bottom: 0px;">Yuhka Sundaya</p>
+        <p style="font-size: 12px; color: gray; margin-top: 0px;">Ekonomi Pembangunan | Unisba | 2026</p>
     </div>
     """, unsafe_allow_html=True)
     
