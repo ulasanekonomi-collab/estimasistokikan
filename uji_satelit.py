@@ -115,7 +115,7 @@ with st.sidebar:
     st.image("https://upload.wikimedia.org/wikipedia/commons/9/9e/Lambang-Universitas_Islam_Bandung.png", width=150)
     
     # 2. Menampilkan Foto Akang (Pastikan file 'foto_yuhka.jpg' ada di folder)
-    st.image("yuka.png", width=150, caption="Yuhka Sundaya") 
+    st.image("yuka.png", width=100) 
     
     # 3. Menampilkan teks identitas
     st.markdown("""
