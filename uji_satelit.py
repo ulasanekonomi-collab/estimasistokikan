@@ -112,10 +112,10 @@ import streamlit as st
 with st.sidebar:
     # 1. Menampilkan Logo Unisba (Pastikan file 'logounisba.png' ada di folder yang sama)
     # Jika belum ada file, bisa lewatkan baris ini atau ganti dengan link URL
-    st.image("https://upload.wikimedia.org/wikipedia/id/thumb/7/7b/Logo_Unisba.png/600px-Logo_Unisba.png", width=150)
+    st.image("https://upload.wikimedia.org/wikipedia/commons/9/9e/Lambang-Universitas_Islam_Bandung.png", width=150)
     
     # 2. Menampilkan Foto Akang (Pastikan file 'foto_yuhka.jpg' ada di folder)
-    # st.image("yuka.png", width=150, caption="Yuhka Sundaya") 
+    st.image("yuka.png", width=150, caption="Yuhka Sundaya") 
     
     # 3. Menampilkan teks identitas
     st.markdown("""
