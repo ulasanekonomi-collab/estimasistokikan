@@ -121,7 +121,7 @@ with st.sidebar:
     st.markdown("""
     <div style="text-align: left;">
         <p style="font-size: 12px; color: blue; margin-bottom: 5px;">Yuhka Sundaya</p>
-        <p style="font-size: 12px; color: gray;">Ekonomi Pembangunan | Unisba | 2026</p>
+        <p style="font-size: 12px; color: gray; margin-top: 0;">Ekonomi Pembangunan | Unisba | 2026</p>
     </div>
     """, unsafe_allow_html=True)
     
