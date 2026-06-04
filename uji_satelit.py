@@ -106,4 +106,23 @@ with st.expander("Lihat Detail Data Mentah"):
         'Estimasi_Stok': '{:.0f}'
     }))
 
+import streamlit as st
 
+# Mengatur logo dan identitas di sidebar
+with st.sidebar:
+    # 1. Menampilkan Logo Unisba (Pastikan file 'logounisba.png' ada di folder yang sama)
+    # Jika belum ada file, bisa lewatkan baris ini atau ganti dengan link URL
+    st.image("https://upload.wikimedia.org/wikipedia/id/thumb/7/7b/Logo_Unisba.png/600px-Logo_Unisba.png", width=150)
+    
+    # 2. Menampilkan Foto Akang (Pastikan file 'foto_yuhka.jpg' ada di folder)
+    # st.image("yuka.png", width=150, caption="Yuhka Sundaya") 
+    
+    # 3. Menampilkan teks identitas
+    st.markdown("""
+    <div style="text-align: center;">
+        <p style="font-size: 14px; font-weight: bold;">Dikembangkan oleh Yuhka Sundaya</p>
+        <p style="font-size: 12px; color: gray;">Ekonomi Pembangunan | Unisba | 2026</p>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    st.markdown("---") # Garis pembatas
